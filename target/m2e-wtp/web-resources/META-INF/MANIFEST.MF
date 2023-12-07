@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Built-By: gabriel
 Build-Jdk: 15.0.2
-Implementation-Title: projeto-maven Maven Webapp
+Implementation-Title: atividade-escola Maven Webapp
 Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: eusably
 Implementation-URL: http://www.example.com

@@ -3,12 +3,16 @@ package repository;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
+
+import com.google.gson.Gson;
+
 import model.Aluno;
 import model.Disciplina;
 
 public class AlunoRepositoryTest {
 
 	private static List<Aluno> listaAluno = new ArrayList<>();
+	private Gson gson = new Gson();
 
 	@Test
 	public List<Aluno> listar() {
@@ -21,7 +25,8 @@ public class AlunoRepositoryTest {
 		aluno2.setNome("Volnei");
 		aluno2.setMatricula("02");
 
-		return listaAluno;
+		System.out.println(listaAluno);
+		return null;
 	}
 
 	@Test
@@ -50,25 +55,25 @@ public class AlunoRepositoryTest {
 
 	@Test
 	public Aluno consultarNomeSobrenome() {
-		Aluno aluno1 = new Aluno();
+		
+		this.cadastrar();		
+		
 		Aluno aluno2 = new Aluno();
-
-		aluno1.setNome("Gabriel");
-		aluno1.setSobrenome("Reis franzen");
-		aluno1.setMatricula("01");
-
 		aluno2.setNome("Volnei");
 		aluno2.setSobrenome("Melo Nascimento");
 		aluno2.setMatricula("02");
 
-		listaAluno.add(aluno1);
 		listaAluno.add(aluno2);
+		
+		Aluno alunoTeste = new Aluno();
 		
 		for(Aluno aluno: listaAluno) {
 			if(aluno.getNome() == "Gabriel" && aluno.getSobrenome() == "Reis Franzen") {
+				alunoTeste = aluno;
 				return aluno;
 			}
 		}
+		System.out.println(alunoTeste);
 		return null;
 	}
 
