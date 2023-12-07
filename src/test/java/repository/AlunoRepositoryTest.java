@@ -95,6 +95,9 @@ public class AlunoRepositoryTest {
 		aluno2.setSobrenome("Melo Nascimento");
 		aluno2.setMatricula("02");
 		
+		aluno2.getDisciplinas().add(matematica);
+		aluno2.getDisciplinas().add(portugues);
+		
 		listaAluno.add(aluno1);
 		listaAluno.add(aluno2);
 		
@@ -167,16 +170,18 @@ public class AlunoRepositoryTest {
 	}
 	
 	@Test
-	public void remover(Aluno aluno) {
+	public void remover() {
 		Aluno aluno1 = new Aluno();
 
 		aluno1.setNome("Gabriel");
 		aluno1.setSobrenome("Reis Franzen");
 		aluno1.setMatricula("01");
 		
-		Aluno atual = aluno1;
+		listaAluno.add(aluno1);
+		
 		System.out.println(listaAluno);
-		listaAluno.remove(atual);
+		listaAluno.remove(aluno1);
+		System.out.println(listaAluno);
 	}
 
 	@Test
