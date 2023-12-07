@@ -9,7 +9,7 @@ public class EnderecoRepositoryTest {
 
 	private static List<Endereco> listaEndereco = new ArrayList<>();
 	
-	public List<Endereco> listar() {
+	public Void listar() {
 		
 		Endereco endereco1 = new Endereco();
 		Endereco endereco2 = new Endereco();
@@ -22,11 +22,12 @@ public class EnderecoRepositoryTest {
 		
 		listaEndereco.add(endereco1);
 		listaEndereco.add(endereco2);
-
-		return listaEndereco;
+		
+		System.out.println(listaEndereco);
+		return null;
 	}
 
-	public Endereco consultar() {
+	public Void consultar() {
 		
 		Endereco endereco1 = new Endereco();
 		Endereco endereco2 = new Endereco();
@@ -45,13 +46,13 @@ public class EnderecoRepositoryTest {
 		
 		for(Endereco endereco: listaEndereco) {
 			if(endereco.getCep() == cep && endereco.getNumero() == numero) {
-				return endereco;
+				System.out.println(endereco);
 			}
 		}
 		return null;
 	}
 
-	public String cadastrar() {
+	public Void cadastrar() {
 		
 		Endereco endereco1 = new Endereco();
 		int maxId = listaEndereco.size() + 1;
@@ -60,21 +61,24 @@ public class EnderecoRepositoryTest {
 		endereco1.setCep("88495-000");;
 		
 		listaEndereco.add(endereco1);
-		return endereco1.toString();
+		System.out.println(endereco1.toString());
+		return null;
 	}
 	
-	public Endereco atualizar() {
+	public Void atualizar() {
 		
 		Endereco endereco = new Endereco();
 		endereco.setId(1);
 		endereco.setCep("88495-000");
 		
-		listaEndereco.add(endereco);		
-		return endereco;
+		listaEndereco.add(endereco);
+		System.out.println(listaEndereco);
+		return null;
+
 	}
 
 	
-	public List<Endereco> remover()  {
+	public Void remover()  {
 		
 		Endereco endereco = new Endereco();
 		endereco.setId(1);
@@ -89,6 +93,8 @@ public class EnderecoRepositoryTest {
 		
 		Endereco atual = endereco2;
 		listaEndereco.remove(atual);
-		return listaEndereco;
+		
+		System.out.println(listaEndereco);
+		return null;
 	}
 }

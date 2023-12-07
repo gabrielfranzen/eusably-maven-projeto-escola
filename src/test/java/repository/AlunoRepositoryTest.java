@@ -4,18 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 
-import com.google.gson.Gson;
-
 import model.Aluno;
 import model.Disciplina;
 
 public class AlunoRepositoryTest {
 
 	private static List<Aluno> listaAluno = new ArrayList<>();
-	private Gson gson = new Gson();
 
 	@Test
-	public List<Aluno> listar() {
+	public Void listar() {
 		Aluno aluno1 = new Aluno();
 		Aluno aluno2 = new Aluno();
 		
@@ -30,7 +27,7 @@ public class AlunoRepositoryTest {
 	}
 
 	@Test
-	public Aluno consultar() {
+	public Void consultar() {
 		Aluno aluno1 = new Aluno();
 		Aluno aluno2 = new Aluno();
 
@@ -47,14 +44,14 @@ public class AlunoRepositoryTest {
 
 		for(Aluno aluno: listaAluno) {
 			if(aluno.getMatricula() == "02") {
-				return aluno;
+				System.out.println(aluno);
 			}
 		}
 		return null;
 	}
 
 	@Test
-	public Aluno consultarNomeSobrenome() {
+	public Void consultarNomeSobrenome() {
 		
 		this.cadastrar();		
 		
@@ -70,7 +67,6 @@ public class AlunoRepositoryTest {
 		for(Aluno aluno: listaAluno) {
 			if(aluno.getNome() == "Gabriel" && aluno.getSobrenome() == "Reis Franzen") {
 				alunoTeste = aluno;
-				return aluno;
 			}
 		}
 		System.out.println(alunoTeste);
@@ -78,7 +74,7 @@ public class AlunoRepositoryTest {
 	}
 
 	@Test
-	public List<Aluno> consultarAlunosMatriculadosDisciplina() {
+	public Void consultarAlunosMatriculadosDisciplina() {
 		Aluno aluno1 = new Aluno();
 		Aluno aluno2 = new Aluno();
 		
@@ -111,11 +107,12 @@ public class AlunoRepositoryTest {
 			}
 			
 		}
-		return matriculados;
+		System.out.println(matriculados);
+		return null;
 	}
 
 	@Test
-	public String cadastrar() {
+	public Void cadastrar() {
 		Aluno aluno = new Aluno();
 		
 		aluno.setNome("Gabriel");
@@ -129,11 +126,13 @@ public class AlunoRepositoryTest {
 		aluno.getDisciplinas().add(portugues);
 		
 		listaAluno.add(aluno);
-		return aluno.toString();
+		System.out.println(listaAluno);
+		return null;
+
 	}
 
 	@Test
-	public String matricularDisciplina() {
+	public Void matricularDisciplina() {
 		Aluno Gabriel = new Aluno();
 
 		Gabriel.setNome("Gabriel");
@@ -148,14 +147,14 @@ public class AlunoRepositoryTest {
 		for(Aluno aluno: listaAluno) {
 			if(aluno.getMatricula() == "01") {
 				aluno.getDisciplinas().add(portugues);
-				return aluno.toString();
+				System.out.println(aluno.getDisciplinas());
 			}
 		}
 		return null;
 	}
 
 	@Test
-	public Aluno atualizar() {
+	public Void atualizar() {
 		Aluno aluno2 = new Aluno();
 
 		aluno2.setNome("Volnei");
@@ -163,7 +162,8 @@ public class AlunoRepositoryTest {
 		aluno2.setMatricula("02");
 		
 		listaAluno.add(aluno2);
-		return aluno2;
+		System.out.println(aluno2);
+		return null;
 	}
 	
 	@Test
@@ -175,11 +175,12 @@ public class AlunoRepositoryTest {
 		aluno1.setMatricula("01");
 		
 		Aluno atual = aluno1;
+		System.out.println(listaAluno);
 		listaAluno.remove(atual);
 	}
 
 	@Test
-	public String desmatricularDisciplina() {
+	public Void desmatricularDisciplina() {
 		Aluno aluno = new Aluno();
 		
 		aluno.setNome("Gabriel");
@@ -204,7 +205,8 @@ public class AlunoRepositoryTest {
 		for(Disciplina disciplina: aluno_matricula.getDisciplinas()) {
 			if(disciplina.getId() == disciplina_desmatricular.getId()) {
 				aluno_matricula.getDisciplinas().remove(disciplina);
-				return ("Aluno " + aluno_matricula.getNome() + 
+				System.out.println(
+				"Aluno " + aluno_matricula.getNome() + 
 						" " + aluno_matricula.getSobrenome() + 
 						"Desmatriculado de " + disciplina.getNome() +
 						" com sucesso.");

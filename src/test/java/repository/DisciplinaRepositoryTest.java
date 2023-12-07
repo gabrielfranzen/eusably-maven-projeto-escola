@@ -10,7 +10,7 @@ public class DisciplinaRepositoryTest {
 
 	private static List<Disciplina> listaDisciplina = new ArrayList<>();
 	
-	public List<Disciplina> listar() {
+	public Void listar() {
 		Disciplina matematica = new Disciplina();
 		Disciplina portugues = new Disciplina();
 		
@@ -23,10 +23,11 @@ public class DisciplinaRepositoryTest {
 		listaDisciplina.add(matematica);
 		listaDisciplina.add(portugues);
 
-		return listaDisciplina;
+		System.out.println(listaDisciplina);
+		return null;
 	}
 
-	public Disciplina consultar() {
+	public Void consultar() {
 		Disciplina matematica = new Disciplina();
 		Disciplina portugues = new Disciplina();
 		
@@ -41,7 +42,7 @@ public class DisciplinaRepositoryTest {
 		
 		for(Disciplina disciplina: listaDisciplina) {
 			if(disciplina.getId() == 2) {
-				return disciplina;
+				System.out.println(disciplina);
 			}
 		}
 		return null;
@@ -61,7 +62,9 @@ public class DisciplinaRepositoryTest {
 		portugues.setId(maxId);
 		
 		listaDisciplina.add(portugues);
-		return portugues.toString();
+		
+		System.out.println(listaDisciplina);
+		return null;
 	}
 	
 	public String atualizar() {
@@ -71,7 +74,8 @@ public class DisciplinaRepositoryTest {
 		matematica.setId(1);
 		listaDisciplina.add(matematica);
 		
-		return matematica.toString();
+		System.out.println(listaDisciplina);
+		return null;
 	}
 
 	public void remover() {
@@ -84,5 +88,7 @@ public class DisciplinaRepositoryTest {
 		Disciplina atual = matematica;
 		
 		listaDisciplina.remove(atual);
+		System.out.println(listaDisciplina);
+		return;
 	}
 }
