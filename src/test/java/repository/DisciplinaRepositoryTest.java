@@ -48,7 +48,7 @@ public class DisciplinaRepositoryTest {
 		return null;
 	}
 
-	public String cadastrar() {
+	public Void cadastrar() {
 		Disciplina matematica = new Disciplina();
 		Disciplina portugues = new Disciplina();
 		
@@ -67,7 +67,7 @@ public class DisciplinaRepositoryTest {
 		return null;
 	}
 	
-	public String atualizar() {
+	public Void atualizar() {
 		Disciplina matematica = new Disciplina();
 		
 		matematica.setNome("Matemática");
