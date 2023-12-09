@@ -3,9 +3,11 @@ package repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateful;
+
 import model.Disciplina;
 
-
+@Stateful
 public class DisciplinaRepository {
 
 	private static List<Disciplina> listaDisciplina = new ArrayList<>();
@@ -23,11 +25,11 @@ public class DisciplinaRepository {
 		return null;
 	}
 
-	public String cadastrar(Disciplina novo) {
+	public Integer cadastrar(Disciplina novo) {
 		int maxId = listaDisciplina.size() + 1;
 		novo.setId(maxId);
 		listaDisciplina.add(novo);
-		return novo.toString();
+		return novo.getId();
 	}
 	
 	public Disciplina atualizar(Disciplina novo) {	

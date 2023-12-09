@@ -12,9 +12,9 @@ public class Aluno {
     private Endereco endereco;
     private String serie;
     private String sexo;
-    private static List<Disciplina> listaDisciplinas = new ArrayList<>();
+    private List<Disciplina> listaDisciplinas = new ArrayList<>();
 
-    
+    @Override
     public String toString() {
         return "Aluno " + nome + " " + sobrenome + "{" +
                 "idade= " + idade +

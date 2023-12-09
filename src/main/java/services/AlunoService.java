@@ -20,7 +20,6 @@ import repository.AlunoRepository;
 @Path("/aluno")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-
 public class AlunoService {
 
 	@Inject
@@ -38,13 +37,13 @@ public class AlunoService {
 	}
 	
 	@GET
-	@Path("/matriculas-disciplinas/{id_disciplina}")
+	@Path("/alunos-matriculados/{id_disciplina}")
 	public Response consultarAlunosMatriculadosDisciplina(@PathParam("id_disciplina") Integer id_disciplina) {
 		return Response.ok().entity(this.alunoRepository.consultarAlunosMatriculadosDisciplina(id_disciplina)).build();
 	}
 	
 	@GET
-	@Path("/nome")
+	@Path("/nome-sobrenome/{nome}/{sobrenome}")
 	public Response consultarNomeSobrenome(String nome, String sobrenome ) {
 		return Response.ok().entity(this.alunoRepository.consultarNomeSobrenome(nome, sobrenome)).build();
 	}
@@ -55,11 +54,10 @@ public class AlunoService {
 	}
 
 
-
 	@PUT
 	public Response atualizar(Aluno aluno) {
 		try {
-			this.alunoRepository.remover(aluno);
+			this.alunoRepository.remover(aluno.getMatricula());
 			return Response.ok(this.alunoRepository.atualizar(aluno)).build();
 		} catch (Exception e) {
 			return Response.serverError().entity(e.getMessage()).build();
@@ -67,7 +65,7 @@ public class AlunoService {
 	}
 	
 	@PUT
-	@Path("/endereco/{matricula}")
+	@Path("/atualizar-endereco/{matricula}")
 	public Response atualizarEndereco(@PathParam("matricula") String matricula, Endereco endereco) {
 		try {
 			return Response.ok(this.alunoRepository.atualizarEndereco(matricula, endereco)).build();
@@ -78,22 +76,23 @@ public class AlunoService {
 	
 	
 	@PUT
-	@Path("/matricular/{matricula_aluno}")
+	@Path("/matricular-disciplina/{matricula_aluno}")
 	public Response matricularDisciplina(String matricula_aluno, Disciplina disciplina_matricular) {
 		return Response.ok().entity(this.alunoRepository.matricularDisciplina(matricula_aluno, disciplina_matricular)).build();
 	}
 	
 	@PUT
-	@Path("/desmatricular/{matricula_aluno}")
+	@Path("/desmatricular-disciplina/{matricula_aluno}")
 	public Response desmatricularDisciplina(String matricula_aluno, Disciplina disciplina_desmatricular) {
 		return Response.ok().entity(this.alunoRepository.matricularDisciplina(matricula_aluno, disciplina_desmatricular)).build();
 	}
 	
 	
 	@DELETE
-	public Response remover(Aluno aluno) {
+	@Path("/{matricula}")
+	public Response remover(@PathParam("matricula") String matricula) {
 		try {
-			this.alunoRepository.remover(aluno);
+			this.alunoRepository.remover(matricula);
 			return Response.ok().build();
 		} catch (Exception e) {
 			return Response.serverError().entity(e.getMessage()).build();

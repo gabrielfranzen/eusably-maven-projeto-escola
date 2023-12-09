@@ -18,7 +18,6 @@ import repository.DisciplinaRepository;
 @Path("/disciplina")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-
 public class DisciplinaService {
 
 	@Inject

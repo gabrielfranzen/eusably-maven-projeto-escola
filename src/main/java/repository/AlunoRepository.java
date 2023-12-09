@@ -3,14 +3,27 @@ package repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateful;
+
 import model.Aluno;
 import model.Disciplina;
 import model.Endereco;
 
+@Stateful
 public class AlunoRepository {
 
 	private static List<Aluno> listaAluno = new ArrayList<>();
 	
+	public String cadastrar(Aluno novo) {
+		listaAluno.add(novo);
+		return novo.getMatricula();
+	}
+	
+	public Aluno atualizar(Aluno novo) {	
+		listaAluno.add(novo);		
+		return novo;
+	}
+
 	public List<Aluno> listar() {
 		return listaAluno;
 	}
@@ -46,36 +59,20 @@ public class AlunoRepository {
 		}
 		return matriculados;
 	}
-
-
-	public String cadastrar(Aluno novo) {
-		listaAluno.add(novo);
-		return novo.toString();
-	}
 	
-	public String matricularDisciplina(String matricula_aluno, Disciplina disciplina_matricular) {
-		for(Aluno aluno: listaAluno) {
-			if(aluno.getMatricula() == matricula_aluno) {
-				aluno.getDisciplinas().add(disciplina_matricular);
-			}
-		}
-		
-		return null;
-	}
-	
-	
-	public Aluno atualizar(Aluno novo) {	
-		listaAluno.add(novo);		
-		return novo;
-	}
-
-	
-	public void remover(Aluno aluno) throws Exception {
-		Aluno atual = this.consultar(aluno.getMatricula());
+	public void remover(String matricula) throws Exception {
+		Aluno atual = this.consultar(matricula);
 		if(atual == null)
 			throw new Exception("Aluno não encontrado");
 		
 		listaAluno.remove(atual);
+	}
+
+	public Aluno matricularDisciplina(String matricula_aluno, Disciplina disciplina_matricular) {
+		Aluno aluno = this.consultar(matricula_aluno);
+		aluno.getDisciplinas().add(disciplina_matricular);
+		
+		return aluno;
 	}
 	
 	
@@ -86,23 +83,23 @@ public class AlunoRepository {
 	}
 	
 	
-	public String desmatricularDisciplina(String matricula_aluno, Disciplina disciplina_desmatricular) throws Exception {
+	public Aluno desmatricularDisciplina(String matricula_aluno, Integer disciplina_desmatricular) throws Exception {
 		
-		Aluno aluno_matricula = this.consultar(matricula_aluno); 
-		if(aluno_matricula == null)
+		Aluno aluno_matriculado = this.consultar(matricula_aluno); 
+		if(aluno_matriculado == null)
 			throw new Exception("Aluno não encontrado");
 		
 		
-		for(Disciplina disciplina: aluno_matricula.getDisciplinas()) {
-			if(disciplina.getId() == disciplina_desmatricular.getId()) {
-				aluno_matricula.getDisciplinas().remove(disciplina);
-				return ("Aluno " + aluno_matricula.getNome() + 
-						" " + aluno_matricula.getSobrenome() + 
-						"Desmatriculado de " + disciplina.getNome() +
-						" com sucesso.");
+		Disciplina remover = new Disciplina();
+		for(Disciplina disciplina: aluno_matriculado.getDisciplinas()) {
+			if(disciplina.getId() == disciplina_desmatricular) {
+				remover = disciplina;
+				System.out.println("TEste achou");
 			}
 		}
 		
-		return null;
+		aluno_matriculado.getDisciplinas().remove(remover);
+
+		return aluno_matriculado;
 	}
 }

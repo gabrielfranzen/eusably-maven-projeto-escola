@@ -18,7 +18,6 @@ import repository.EnderecoRepository;
 @Path("/endereco")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-
 public class EnderecoService {
 
 	@Inject
@@ -30,9 +29,9 @@ public class EnderecoService {
 	}
 
 	@GET
-	@Path("/{cep}/{numero}")
-	public Response consultar(@PathParam("cep") String cep, @PathParam("numero") String numero) {
-		return Response.ok().entity(this.enderecoRepository.consultar(cep, numero)).build();
+	@Path("/{cep}")
+	public Response consultar(@PathParam("cep") String cep) {
+		return Response.ok().entity(this.enderecoRepository.consultar(cep)).build();
 	}
 
 	@POST
@@ -43,7 +42,7 @@ public class EnderecoService {
 	@PUT
 	public Response atualizar(Endereco funcionario) {
 		try {
-			this.enderecoRepository.remover(funcionario);
+			this.enderecoRepository.remover(funcionario.getCep());
 			return Response.ok(this.enderecoRepository.atualizar(funcionario)).build();
 		} catch (Exception e) {
 			return Response.serverError().entity(e.getMessage()).build();
@@ -53,7 +52,7 @@ public class EnderecoService {
 	@DELETE
 	public Response remover(Endereco funcionario) {
 		try {
-			this.enderecoRepository.remover(funcionario);
+			this.enderecoRepository.remover(funcionario.getCep());
 			return Response.ok().build();
 		} catch (Exception e) {
 			return Response.serverError().entity(e.getMessage()).build();
